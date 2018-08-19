@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import classes from './App.scss';
-
 import RankingCreator from './containers/RankingCreator/RankingCreator';
 import AuthManager from './containers/AuthManager/AuthManager';
 
