@@ -23,10 +23,10 @@ const authConfig = {
 const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-      return true;
+      return false;
     },
     uiShown: () => {
-      console.log('uiShown');
+      // console.log('uiShown');
     }
   },
   signInFlow: 'popup',

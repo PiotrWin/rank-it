@@ -3,8 +3,7 @@ import initialState from '../defaultState';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-  case actionTypes.SHOW_CURRENT_USER:
-    console.log('show');
+  case actionTypes.GET_CURRENT_USER:
     return {
       ...state,
       user: action.user

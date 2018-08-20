@@ -4,12 +4,11 @@ import defaultState from '../defaultState';
 
 const defaultUser = { ...defaultState.user };
 
-export const showCurrentUser = user => {
+export const getCurrentUser = user => {
   const currentUser = user || defaultUser;
   const provider = currentUser.providerData ? currentUser.providerData[0].providerId : '';
-  console.log(user);
   return {
-    type: actionTypes.SHOW_CURRENT_USER,
+    type: actionTypes.GET_CURRENT_USER,
     user: {
       displayName: currentUser.displayName || currentUser.email,
       email: currentUser.email,
@@ -20,6 +19,13 @@ export const showCurrentUser = user => {
   };
 };
 
-export const getCurrentUser = () => {
-  return dispatch => dispatch(showCurrentUser(auth.currentUser));
+export const signOut = () => {
+  return dispatch => {
+    auth.signOut()
+      .then(() => dispatch(getCurrentUser()))
+      .catch(error => console.log(error));
+  };
 };
+// export const getCurrentUser = () => {
+//   return dispatch => dispatch(showCurrentUser(auth.currentUser));
+// };

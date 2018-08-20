@@ -8,55 +8,33 @@ import { uiConfig } from '../../firebase/config';
 import * as actionCreators from '../../store/actions/auth';
 
 class AuthManager extends Component {
-  state = {
-    authenticated: false,
-    user: 'none'
-  };
-
   componentDidMount() {
-    // this.setState({ user: auth.currentUser() });
-    // console.log(auth.currentUser());
     authUI.start('#firebase-auth-container', uiConfig);
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        console.log('logged: ', user);
-      }
-      else {
-        console.log('logged out: ', user);
-      }
-    });
-  }
-
-
-  signInTest = () => {
-    auth.signInWithEmailAndPassword('test2@test.com', 'testpass')
-      .then(response => {
-        // this.setState({ user: response.user.email });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    auth.onAuthStateChanged(user => (
+      this.props.onGetCurrentUser(user ? user : null)
+    ));
   }
 
   signOut = () => {
-    auth.signOut();
-  }
+    this.props.onSignOut();
+    console.log(authUI);
+    authUI.start('#firebase-auth-container', uiConfig);
+  };
 
   log = () => {
-    console.log('user: ', auth.currentUser);
-  }
+
+  };
 
   render() {
     return (
       <Aux>
         <div>
-          User: {this.state.user}
+          User: {this.props.user.displayName}
         </div>
-        <button onClick={this.signInTest}>Sign in test</button>
         <button onClick={this.signOut}>Sign out</button>
         <button onClick={this.log}>Log</button>
         <button 
-          onClick={this.props.onGetCurrentUser}>
+          onClick={() => this.props.onGetCurrentUser(auth.currentUser)}>
         getCurrentUser
         </button>
         <div id="firebase-auth-container"></div>
@@ -68,14 +46,14 @@ class AuthManager extends Component {
 
 const mapStateToProps = state => {
   return {
-    authenticated: state.authenticated,
     user: state.user,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCurrentUser: () => dispatch(actionCreators.getCurrentUser()),
+    onGetCurrentUser: user => dispatch(actionCreators.getCurrentUser(user)),
+    onSignOut: () => dispatch(actionCreators.signOut()),
   };
 };
 
