@@ -1,7 +1,7 @@
 const defaultState = {
   signedIn: false,
   user: {
-    displayName: 'anonymous',
+    displayName: 'none',
     email: '',
     emailVerified: false,
     provider: '',

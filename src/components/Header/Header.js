@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Aux from '../../hoc/Auxx';
 import * as actionCreators from '../../store/actions/auth';
+import * as firebaseHelpers from '../../firebase/helpers';
 import { auth } from '../../firebase';
 
 class Header extends Component {
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => (
-      this.props.onGetCurrentUser(user ? user : null)
-    ));
+    auth.onAuthStateChanged(user => {
+      this.props.onGetCurrentUser(user ? user : null);
+    });
+  }
+
+  shouldComponentUpdate(prevProps) {
+    return this.props.user.displayName !== prevProps.user.displayName;
   }
 
   render() {

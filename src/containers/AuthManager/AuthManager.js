@@ -6,19 +6,30 @@ import Aux from '../../hoc/Auxx';
 import { auth, authUI } from '../../firebase';
 import { uiConfig } from '../../firebase/config';
 import * as actionCreators from '../../store/actions/auth';
+import * as firebaseHelpers from '../../firebase/helpers';
 
 class AuthManager extends Component {
+
   componentDidMount() {
-    authUI.start('#firebase-auth-container', uiConfig);
-    auth.onAuthStateChanged(user => (
-      this.props.onGetCurrentUser(user ? user : null)
-    ));
+    authUI.start(`#${firebaseHelpers.authContainer}`, uiConfig);
+    auth.onAuthStateChanged(user => {
+      this.props.onGetCurrentUser(user ? user : null);
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.displayName !== 'none' 
+      && this.props.user.displayName === 'none') {
+      firebaseHelpers.restartUI(authUI, `#${firebaseHelpers.authContainer}`);
+    }
+  }
+
+  shouldComponentUpdate(prevProps) {
+    return this.props.user.displayName !== prevProps.user.displayName;
   }
 
   signOut = () => {
     this.props.onSignOut();
-    console.log(authUI);
-    authUI.start('#firebase-auth-container', uiConfig);
   };
 
   log = () => {
@@ -37,7 +48,7 @@ class AuthManager extends Component {
           onClick={() => this.props.onGetCurrentUser(auth.currentUser)}>
         getCurrentUser
         </button>
-        <div id="firebase-auth-container"></div>
+        <div id={firebaseHelpers.authContainer}></div>
         <div>{JSON.stringify(this.props.user)}</div>
       </Aux>
     );
