@@ -13,6 +13,7 @@ export const getCurrentUser = user => {
       displayName: currentUser.displayName || currentUser.email,
       email: currentUser.email,
       emailVerified: currentUser.emailVerified,
+      photoURL: currentUser.photoURL,
       provider: provider,
       uid: currentUser.uid
     }

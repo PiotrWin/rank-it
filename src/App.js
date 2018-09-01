@@ -11,11 +11,13 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Header />
-        <Switch>
-          <Route path="/login" component={AuthManager} />
-          <Route path="/creator" component={RankingCreator} />
-          <Redirect from="/" to="/creator" />
-        </Switch>
+        <div className={classes.AppContent}>
+          <Switch>
+            <Route path="/creator" component={RankingCreator} />
+            <Route path="/login" component={AuthManager} />
+            <Route path="/" component={RankingCreator} />
+          </Switch>
+        </div>
       </div>
     );
   }

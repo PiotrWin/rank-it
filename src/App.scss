@@ -1,3 +1,16 @@
 .App {
+  color: #5f2100;
   width: 100%;
+
+  .AppContent {
+    margin-top: 60px;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.App,
+button {
+  font-family: 'Montserrat', sans-serif;
 }

@@ -1,0 +1,36 @@
+.Header {
+  align-items: center;
+  background-color: #ffb74d; 
+  box-shadow: 0 1px 5px 0 #777;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  padding: 10px 15px;
+  position: fixed;
+  width: 100%;
+
+  .Button {
+    color: #5f2100;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.15rem;
+    background-color: transparent;
+    padding: 10px 30px;
+    border: none;
+    height: 60px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: darken(#ffb74d, 10%);
+    }
+
+    &:active {
+      outline: none;
+      background-color: darken(#ffb74d, 15%);
+    }
+  }
+}

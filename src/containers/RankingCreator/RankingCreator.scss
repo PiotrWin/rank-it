@@ -1,0 +1,21 @@
+.RankingCreator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .TypeSelector {
+    background-color: #ffe0b2;
+    border-radius: 10px;
+    color: #5f2100;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    max-width: 150px;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

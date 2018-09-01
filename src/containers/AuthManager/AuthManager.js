@@ -28,9 +28,7 @@ class AuthManager extends Component {
     return this.props.user.displayName !== prevProps.user.displayName;
   }
 
-  signOut = () => {
-    this.props.onSignOut();
-  };
+  signOut = () => this.props.onSignOut();
 
   log = () => {
 
@@ -39,33 +37,17 @@ class AuthManager extends Component {
   render() {
     return (
       <Aux>
-        <div>
-          User: {this.props.user.displayName}
-        </div>
-        <button onClick={this.signOut}>Sign out</button>
-        <button onClick={this.log}>Log</button>
-        <button 
-          onClick={() => this.props.onGetCurrentUser(auth.currentUser)}>
-        getCurrentUser
-        </button>
         <div id={firebaseHelpers.authContainer}></div>
-        <div>{JSON.stringify(this.props.user)}</div>
       </Aux>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = state => ({ user: state.user });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onGetCurrentUser: user => dispatch(actionCreators.getCurrentUser(user)),
-    onSignOut: () => dispatch(actionCreators.signOut()),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  onGetCurrentUser: user => dispatch(actionCreators.getCurrentUser(user)),
+  onSignOut: () => dispatch(actionCreators.signOut()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthManager);

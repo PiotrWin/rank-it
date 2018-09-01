@@ -1,0 +1,43 @@
+.UserInfo {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  // margin-left: 50%;
+
+  %user-photo {
+    border-radius: 100%;
+    box-shadow: 0 0 5px 0px #5f2100;
+    height: 40px;
+    width: 40px;
+    
+    img {
+      border-radius: 100%;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .UserPhoto {
+    @extend %user-photo;
+  }
+
+  .UserPhoto__NoUser {
+    @extend %user-photo;
+  }
+
+  %user-name {
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  .UserName {
+    @extend %user-name;
+    box-shadow: 0 1px 0 0 #5f2100;
+  }
+
+  .UserName__NoUser {
+    @extend %user-name;
+  }
+}
+
